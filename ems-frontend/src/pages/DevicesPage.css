@@ -1,0 +1,270 @@
+/* ====================================================== */
+/* DEVICES PAGE - Energy Theme (Alb, Galben, Gri)       */
+/* ====================================================== */
+
+.devices-page {
+    animation: fadeIn 0.3s ease;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #FDB813;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2C3E50;
+}
+
+/* ====================================================== */
+/* TABLE STYLES                                           */
+/* ====================================================== */
+
+.table-container {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    border-top: 4px solid #FDB813;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table thead {
+    background: linear-gradient(135deg, #FAFAFA 0%, #ECEFF1 100%);
+}
+
+.data-table th {
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: #2C3E50;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 3px solid #FDB813;
+}
+
+.data-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #ECEFF1;
+    color: #2C3E50;
+}
+
+.data-table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.data-table tbody tr:hover {
+    background-color: #FFF9E6;
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.empty-state {
+    text-align: center;
+    color: #607D8B;
+    padding: 3rem !important;
+    font-size: 1rem;
+}
+
+/* ====================================================== */
+/* BADGE STYLES                                           */
+/* ====================================================== */
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-user {
+    background: linear-gradient(135deg, #FDB813 0%, #FFD700 100%);
+    color: #2C3E50;
+    box-shadow: 0 2px 8px rgba(253, 184, 19, 0.3);
+}
+
+.badge-unassigned {
+    background-color: #ECEFF1;
+    color: #607D8B;
+}
+
+/* ====================================================== */
+/* ACTION BUTTONS                                         */
+/* ====================================================== */
+
+.action-buttons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ====================================================== */
+/* MODAL STYLES                                           */
+/* ====================================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(44, 62, 80, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.2s ease;
+    padding: 1rem;
+}
+
+.modal-content {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideIn 0.3s ease;
+    border-top: 4px solid #FDB813;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 2px solid #ECEFF1;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2C3E50;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #607D8B;
+    cursor: pointer;
+    padding: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.close-btn:hover {
+    background-color: #ECEFF1;
+    color: #2C3E50;
+}
+
+/* ====================================================== */
+/* FORM STYLES                                            */
+/* ====================================================== */
+
+form {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #2C3E50;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ECEFF1;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    color: #2C3E50;
+    transition: all 0.2s;
+    background-color: #FAFAFA;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #FDB813;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(253, 184, 19, 0.1);
+}
+
+.form-group input:disabled {
+    background-color: #ECEFF1;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    border-top: 2px solid #ECEFF1;
+}
+
+/* ====================================================== */
+/* RESPONSIVE                                             */
+/* ====================================================== */
+
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .table-container {
+        overflow-x: auto;
+    }
+
+    .data-table {
+        min-width: 800px;
+    }
+
+    .modal-content {
+        margin: 0 1rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+    }
+}
