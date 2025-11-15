@@ -32,7 +32,7 @@ services:
     environment:
       POSTGRES_DB: DS_EMS_USER
       POSTGRES_USER: tomarm
-      POSTGRES_PASSWORD: cara2016
+      POSTGRES_PASSWORD: ****
     ports:
       - "5432:5432"
     volumes:
@@ -55,7 +55,7 @@ services:
     environment:
       POSTGRES_DB: DS_EMS_DEVICE
       POSTGRES_USER: tomarm
-      POSTGRES_PASSWORD: cara2016
+      POSTGRES_PASSWORD: ****
     ports:
       - "5433:5432"
     volumes:
@@ -78,7 +78,7 @@ services:
     environment:
       POSTGRES_DB: DS_EMS_CREDENTIAL
       POSTGRES_USER: tomarm
-      POSTGRES_PASSWORD: cara2016
+      POSTGRES_PASSWORD: ****
     ports:
       - "5434:5432"
     volumes:
@@ -103,7 +103,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://user-db:5432/DS_EMS_USER
       SPRING_DATASOURCE_USERNAME: tomarm
-      SPRING_DATASOURCE_PASSWORD: cara2016
+      SPRING_DATASOURCE_PASSWORD: ****
       PORT: "8082"
     ports:
       - "8082:8082"
@@ -132,7 +132,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://device-db:5432/DS_EMS_DEVICE
       SPRING_DATASOURCE_USERNAME: tomarm
-      SPRING_DATASOURCE_PASSWORD: cara2016
+      SPRING_DATASOURCE_PASSWORD: ****
       PORT: "8083"
     ports:
       - "8083:8083"
@@ -161,7 +161,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://credential-db:5432/DS_EMS_CREDENTIAL
       SPRING_DATASOURCE_USERNAME: tomarm
-      SPRING_DATASOURCE_PASSWORD: cara2016
+      SPRING_DATASOURCE_PASSWORD: ****
       PORT: "8084"
     ports:
       - "8084:8084"
