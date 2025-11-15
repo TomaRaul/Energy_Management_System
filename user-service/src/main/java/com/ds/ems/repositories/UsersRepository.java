@@ -10,17 +10,12 @@ import java.util.Optional;
 
 public interface UsersRepository extends JpaRepository<Users, Integer> {
 
-    /**
-     * Example: JPA generate query by existing field
-     */
+    // JPA generate query by existing field
     List<Users> findByName(String name);
 
-    /**
-     * Example: Custom query
-     */
     @Query(value = "SELECT p " +
             "FROM Users p " +
             "WHERE p.name = :name " )
-    Optional<Users> findSeniorsByName(@Param("name") String name);
+    Optional<Users> findUsersByName(@Param("name") String name);
 
 }

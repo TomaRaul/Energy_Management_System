@@ -10,17 +10,15 @@ import java.util.Optional;
 
 public interface DeviceRepository extends JpaRepository<Device, Integer> {
 
-    /**
-     * Example: JPA generate query by existing field
-     */
+    // JPA generate query by existing field
     List<Device> findByName(String name);
 
-    /**
-     * Example: Custom query
-     */
     @Query(value = "SELECT p " +
             "FROM Device p " +
             "WHERE p.name = :name " )
-    Optional<Device> findSeniorsByName(@Param("name") String name);
+    Optional<Device> findDevicesByName(@Param("name") String name);
+
+    @Query("SELECT d FROM Device d WHERE d.user_id = :user_id")
+    List<Device> findDevicesByUserId(@Param("user_id") Integer user_id);
 
 }

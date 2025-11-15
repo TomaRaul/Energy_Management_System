@@ -5,6 +5,7 @@ import com.ds.ems.dtos.UsersDetailsDTO;
 import com.ds.ems.services.UsersService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -24,16 +25,19 @@ public class UsersController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'CLIENT')")
     public ResponseEntity<List<UsersDTO>> getUsers() {
         return ResponseEntity.ok(UsersService.findUsers());
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<UsersDetailsDTO> getUsers(@PathVariable int id) {
         return ResponseEntity.ok(UsersService.findUsersById(id));
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> create(@Valid @RequestBody UsersDetailsDTO Users) {
         int id = UsersService.insert(Users);
         URI location = ServletUriComponentsBuilder
@@ -45,12 +49,14 @@ public class UsersController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteUser(@PathVariable int id) {
         UsersService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> updateUser(
             @PathVariable Integer id,
             @Valid @RequestBody UsersDetailsDTO dto) {

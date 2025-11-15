@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 public class Credentials {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -20,13 +20,19 @@ public class Credentials {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @NotNull
+    @Column(name = "role", nullable = false)
+    private String role;
+
     // Constructors
     public Credentials() {
     }
 
-    public Credentials(String username, String password) {
+    public Credentials(Integer id, String username, String password, String role) {
+        this.id = id;
         this.username = username;
         this.password = password;
+        this.role = role;
     }
 
     // Getters and Setters
@@ -53,4 +59,8 @@ public class Credentials {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getRole() { return role; }
+
+    public void setRole(String role) { this.role = role; }
 }

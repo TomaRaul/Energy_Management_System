@@ -10,6 +10,7 @@ import com.ds.ems.entities.Users;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -29,7 +30,7 @@ public class UsersService {
     }
 
     public List<UsersDTO> findUsers() {
-        List<Users> UsersList = UsersRepository.findAll();
+        List<Users> UsersList = UsersRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         return UsersList.stream()
                 .map(UsersBuilder::toUsersDTO)
                 .collect(Collectors.toList());
@@ -54,14 +55,13 @@ public class UsersService {
     public void deleteUser(int id) {
         LOGGER.info("Deleting user with ID: {}", id);
 
-        // Verifica ca user-ul exista
+        // verifica ca user-ul exista
         if (!UsersRepository.existsById(id)) {
             throw new RuntimeException("User not found with id: " + id);
         }
 
-        // Șterge user-ul
+        // sterge user-ul
         UsersRepository.deleteById(id);
-
         LOGGER.info("User deleted successfully: {}", id);
     }
 

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
 import UsersPage from './pages/UsersPage';
 import DevicesPage from './pages/DevicesPage';
-import ClientDevicesPage from './pages/ClientDevicesPage'; // Pagină nouă pentru client
+import ClientDevicesPage from './pages/ClientDevicesPage';
 import LoginPage from './pages/LoginPage';
 import './App.css';
 

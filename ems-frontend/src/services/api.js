@@ -36,6 +36,12 @@ export const usersAPI = {
 export const devicesAPI = {
     getAll: () => api.get('/devices'),
     getById: (id) => api.get(`/devices/${id}`),
+    getByUserId: (user_id) => api.get(`/devices/my/${user_id}`),
+/*    getByUserId: (user_id) => api.get(`/devices`, {
+        params: {
+            userId: user_id //devices?userId=123
+        }}),
+ */
     create: (device) => api.post('/devices', device),
     update: (id, device) => api.put(`/devices/${id}`, device),
     delete: (id) => api.delete(`/devices/${id}`)
@@ -44,7 +50,8 @@ export const devicesAPI = {
 // Auth API
 export const authAPI = {
     login: (credentials) => api.post('/auth/login', credentials),
-    register: (userData) => api.post('/auth/register', userData)
+    register: (userData) => api.post('/auth/register', userData),
+    delete: (id) => api.delete(`/auth/delete/${id}`)
 };
 
 export default api;

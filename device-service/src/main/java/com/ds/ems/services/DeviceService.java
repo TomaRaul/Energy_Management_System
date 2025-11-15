@@ -10,6 +10,7 @@ import com.ds.ems.entities.Device;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -29,7 +30,7 @@ public class DeviceService {
     }
 
     public List<DeviceDTO> findDevice() {
-        List<Device> DeviceList = DeviceRepository.findAll();
+        List<Device> DeviceList = DeviceRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));
         return DeviceList.stream()
                 .map(DeviceBuilder::toDeviceDTO)
                 .collect(Collectors.toList());
@@ -42,6 +43,13 @@ public class DeviceService {
             throw new ResourceNotFoundException(Device.class.getSimpleName() + " with id: " + id);
         }
         return DeviceBuilder.toDeviceDetailsDTO(prosumerOptional.get());
+    }
+
+    public List<DeviceDTO> findDeviceByUserId(Integer user_id ) {
+        List<Device> DeviceList = DeviceRepository.findDevicesByUserId(user_id);
+        return DeviceList.stream()
+                .map(DeviceBuilder::toDeviceDTO)
+                .collect(Collectors.toList());
     }
 
     public int insert(DeviceDetailsDTO DeviceDTO) {

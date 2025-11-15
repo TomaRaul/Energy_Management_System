@@ -15,8 +15,8 @@ const ClientDevicesPage = ({ userId }) => {
     setLoading(true);
     setError(null);
     try {
-      // Fetch all devices
-      const response = await devicesAPI.getAll();
+      // citire toate device-urile unui client
+      const response = await devicesAPI.getByUserId(userId);
       
       // filter doar device-urile asociate cu userId-ul curent
       const myDevices = response.data.filter(device => device.userId === parseInt(userId));
