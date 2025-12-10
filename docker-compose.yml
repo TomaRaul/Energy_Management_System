@@ -27,23 +27,23 @@ services:
   # MESSAGE BROKER - RabbitMQ
   # ==========================================
   rabbitmq:
-    image: rabbitmq:3.12-management
-    container_name: rabbitmq
-    ports:
-      - "5672:5672"      # AMQP port
-      - "15672:15672"    # Management UI
-    environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
-    volumes:
-      - rabbitmq-data:/var/lib/rabbitmq
-    networks:
-      - ems-network
-    healthcheck:
-      test: rabbitmq-diagnostics -q ping
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      image: rabbitmq:3.12-management
+      container_name: rabbitmq
+      ports:
+        - "5672:5672"      # AMQP port
+        - "15672:15672"    # Management UI
+      environment:
+        RABBITMQ_DEFAULT_USER: admin
+        RABBITMQ_DEFAULT_PASS: admin
+      volumes:
+        - rabbitmq-data:/var/lib/rabbitmq
+      networks:
+        - ems-network
+      healthcheck:
+        test: rabbitmq-diagnostics -q ping
+        interval: 10s
+        timeout: 5s
+        retries: 5
 
   # =========================
   # USER DATABASE
@@ -148,6 +148,10 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://user-db:5432/DS_EMS_USER
       SPRING_DATASOURCE_USERNAME: tomarm
       SPRING_DATASOURCE_PASSWORD: cara2016
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin
       PORT: "8082"
     ports:
       - "8082:8082"
@@ -155,6 +159,8 @@ services:
       - ems-network
     depends_on:
       user-db:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     labels:
       - "traefik.enable=true"
@@ -177,6 +183,10 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://device-db:5432/DS_EMS_DEVICE
       SPRING_DATASOURCE_USERNAME: tomarm
       SPRING_DATASOURCE_PASSWORD: cara2016
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: admin
+      SPRING_RABBITMQ_PASSWORD: admin
       PORT: "8083"
     ports:
       - "8083:8083"
@@ -184,6 +194,8 @@ services:
       - ems-network
     depends_on:
       device-db:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     labels:
       - "traefik.enable=true"
@@ -227,36 +239,36 @@ services:
     # MONITOR SERVICE
     # =========================
   monitoring-service:
-    build:
-      context: ./monitoring-service
-      dockerfile: Dockerfile
-    container_name: monitoring-service
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://monitoring-db:5432/DS_EMS_MONITOR
-      SPRING_DATASOURCE_USERNAME: tomarm
-      SPRING_DATASOURCE_PASSWORD: cara2016
-      SPRING_RABBITMQ_HOST: rabbitmq
-      SPRING_RABBITMQ_PORT: 5672
-      SPRING_RABBITMQ_USERNAME: admin
-      SPRING_RABBITMQ_PASSWORD: admin
-      PORT: "8085"
-    ports:
-      - "8085:8085"
-    depends_on:
-      monitoring-db:
-        condition: service_healthy
-      rabbitmq:
-        condition: service_healthy
-    networks:
-      - ems-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.monitoring-service-web.rule=PathPrefix(`/monitor`)"
-      - "traefik.http.routers.monitoring-service-web.entrypoints=web"
-      - "traefik.http.routers.monitoring-service-web2.rule=PathPrefix(`/monitor`)"
-      - "traefik.http.routers.monitoring-service-web2.entrypoints=web2"
-      - "traefik.http.services.monitoring-service.loadbalancer.server.port=8085"
-    restart: on-failure
+      build:
+        context: ./monitoring-service
+        dockerfile: Dockerfile
+      container_name: monitoring-service
+      environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://monitoring-db:5432/DS_EMS_MONITOR
+        SPRING_DATASOURCE_USERNAME: tomarm
+        SPRING_DATASOURCE_PASSWORD: cara2016
+        SPRING_RABBITMQ_HOST: rabbitmq
+        SPRING_RABBITMQ_PORT: 5672
+        SPRING_RABBITMQ_USERNAME: admin
+        SPRING_RABBITMQ_PASSWORD: admin
+        PORT: "8085"
+      ports:
+        - "8085:8085"
+      depends_on:
+        monitoring-db:
+          condition: service_healthy
+        rabbitmq:
+          condition: service_healthy
+      networks:
+        - ems-network
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.monitoring-service-web.rule=PathPrefix(`/monitor`)"
+        - "traefik.http.routers.monitoring-service-web.entrypoints=web"
+        - "traefik.http.routers.monitoring-service-web2.rule=PathPrefix(`/monitor`)"
+        - "traefik.http.routers.monitoring-service-web2.entrypoints=web2"
+        - "traefik.http.services.monitoring-service.loadbalancer.server.port=8085"
+      restart: on-failure
 
   # =========================
   # FRONTEND

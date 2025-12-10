@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 
 public class RegisterRequest {
 
-    @NotBlank(message = "Id is required")
+    //@NotBlank(message = "Id is required")
     private Integer id;
 
     @NotBlank(message = "Username is required")

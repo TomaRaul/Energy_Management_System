@@ -54,4 +54,14 @@ export const authAPI = {
     delete: (id) => api.delete(`/auth/delete/${id}`)
 };
 
+// Monitor API
+export const monitoringAPI = {
+    getConsumption: (deviceId, date) =>
+        api.get('/monitor/consumption', {
+            params: { deviceId, date }
+        }),
+    getAllConsumptionForDevice: (deviceId) =>
+        api.get('/monitoring/consumption/${deviceId}/all'),
+};
+
 export default api;

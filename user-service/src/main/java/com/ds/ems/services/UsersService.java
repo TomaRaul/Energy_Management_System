@@ -23,10 +23,12 @@ import java.util.stream.Collectors;
 public class UsersService {
     private static final Logger LOGGER = LoggerFactory.getLogger(UsersService.class);
     private final UsersRepository UsersRepository;
+    private final EventPublisherService eventPublisher;
 
     @Autowired
-    public UsersService(UsersRepository UsersRepository) {
+    public UsersService(UsersRepository UsersRepository, EventPublisherService eventPublisher) {
         this.UsersRepository = UsersRepository;
+        this.eventPublisher = eventPublisher;
     }
 
     public List<UsersDTO> findUsers() {
@@ -49,6 +51,13 @@ public class UsersService {
         Users Users = UsersBuilder.toEntity(UsersDTO);
         Users = UsersRepository.save(Users);
         LOGGER.debug("Users with id {} was inserted in db", Users.getId());
+        // Publică eveniment pentru sincronizare
+        eventPublisher.publishUserCreatedEvent(
+                Users.getId().longValue()
+                //Users.getName(),
+                //Users.getEmail(),
+                //Users.getRole()
+        );
         return Users.getId();
     }
 

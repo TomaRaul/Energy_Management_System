@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-ro
 import UsersPage from './pages/UsersPage';
 import DevicesPage from './pages/DevicesPage';
 import ClientDevicesPage from './pages/ClientDevicesPage';
+import EnergyConsumptionPage from './pages/EnergyConsumptionPage';
 import LoginPage from './pages/LoginPage';
 import './App.css';
 
@@ -91,11 +92,18 @@ function App() {
 
                                             {/* Client vede doar My Devices */}
                                             {userRole === 'client' && (
+                                                <>
                                                 <li className="nav-item">
                                                     <Link to="/my-devices" className="nav-link">
                                                         🔌 My Devices
                                                     </Link>
                                                 </li>
+                                                <li className="nav-item">
+                                                    <Link to="/consumption" className="nav-link">
+                                                        📊 Consumption
+                                                    </Link>
+                                                </li>
+                                                </>
                                             )}
 
                                             {/* Badge pentru role + Logout */}
@@ -148,6 +156,10 @@ function App() {
                                                 <Route
                                                     path="/my-devices"
                                                     element={<ClientDevicesPage userId={userId} />}
+                                                />
+                                                <Route
+                                                    path="/consumption"
+                                                    element={<EnergyConsumptionPage userId={userId} />}
                                                 />
                                                 <Route path="/" element={<Navigate to="/my-devices" replace />} />
                                             </>
