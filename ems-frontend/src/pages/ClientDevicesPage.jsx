@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { devicesAPI } from '../services/api';
-import './DevicesPage.css';
+import '../css/DevicesPage.css';
 
 const ClientDevicesPage = ({ userId }) => {
   const [devices, setDevices] = useState([]);
@@ -122,7 +122,7 @@ const ClientDevicesPage = ({ userId }) => {
                       color: '#2196f3',
                       fontSize: '16px'
                     }}>
-                      {device.MCV ? `${device.MCV} W` : 'Not specified'}
+                      {device.MCV ? `${device.MCV} kWh` : 'Not specified'}
                     </span>
                   </div>
 
@@ -162,13 +162,13 @@ const ClientDevicesPage = ({ userId }) => {
               <div>
                 <div style={{fontSize: '12px', opacity: 0.9, marginBottom: '0.25rem'}}>Total Max Consumption</div>
                 <div style={{fontSize: '24px', fontWeight: 'bold'}}>
-                  {devices.reduce((sum, d) => sum + (d.MCV || 0), 0)} W
+                  {devices.reduce((sum, d) => sum + (d.MCV || 0), 0)} kWh
                 </div>
               </div>
               <div>
                 <div style={{fontSize: '12px', opacity: 0.9, marginBottom: '0.25rem'}}>Average MCV</div>
                 <div style={{fontSize: '24px', fontWeight: 'bold'}}>
-                  {devices.length > 0 ? Math.round(devices.reduce((sum, d) => sum + (d.MCV || 0), 0) / devices.length) : 0} W
+                  {devices.length > 0 ? Math.round(devices.reduce((sum, d) => sum + (d.MCV || 0), 0) / devices.length) : 0} kWh
                 </div>
               </div>
             </div>

@@ -69,4 +69,9 @@ public class DeviceController {
         DeviceService.updateDevice(id, dto);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/intern/{id}")
+    public ResponseEntity<DeviceDetailsDTO> getDeviceInternal(@PathVariable int id) {
+        return ResponseEntity.ok(DeviceService.findDeviceById(id));
+    }
 }

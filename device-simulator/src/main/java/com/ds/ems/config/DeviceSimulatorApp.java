@@ -91,7 +91,7 @@ public static void main(String[] args) {
                     generator.adjustBaseLoad();
                 }
 
-                // Așteapta intervalul specificat
+                // așteapta intervalul specificat
                 Thread.sleep(interval);
 
             } catch (InterruptedException e) {
@@ -99,7 +99,7 @@ public static void main(String[] args) {
                 running = false;
             } catch (IOException e) {
                 System.err.println("Error sending message: " + e.getMessage());
-                // Incearca să reconecteze
+                // incearca sa reconecteze
                 if (!producer.isConnected()) {
                     System.out.println("Attempting to reconnect...");
                     try {

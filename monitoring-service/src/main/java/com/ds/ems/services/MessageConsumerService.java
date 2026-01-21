@@ -48,28 +48,4 @@ public class MessageConsumerService {
            // LOGGER.error("Error processing device data message: {}", message, e);
         }
     }
-
-    /**
-     * Consumer pentru evenimente de sincronizare
-     */
-//    @RabbitListener(queues = "${rabbitmq.queue.sync}")
-//    public void receiveSyncEvent(String message) {
-//        try {
-//            log.info("Received sync event: {}", message);
-//
-//            // Încearcă să parse ca DeviceCreatedEvent
-//            if (message.contains("device_id")) {
-//                DeviceCreatedEvent event = objectMapper.readValue(message, DeviceCreatedEvent.class);
-//                synchronizationService.handleDeviceCreated(event);
-//            }
-//            // Încearcă să parse ca UserCreatedEvent
-//            else if (message.contains("user_id")) {
-//                UserCreatedEvent event = objectMapper.readValue(message, UserCreatedEvent.class);
-//                synchronizationService.handleUserCreated(event);
-//            }
-//
-//        } catch (Exception e) {
-//            log.error("Error processing sync event: {}", message, e);
-//        }
-//    }
 }

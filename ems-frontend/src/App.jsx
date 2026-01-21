@@ -6,6 +6,7 @@ import DevicesPage from './pages/DevicesPage';
 import ClientDevicesPage from './pages/ClientDevicesPage';
 import EnergyConsumptionPage from './pages/EnergyConsumptionPage';
 import LoginPage from './pages/LoginPage';
+import ChatPage from './pages/ChatPage';
 import './App.css';
 
 function App() {
@@ -106,6 +107,14 @@ function App() {
                                                 </>
                                             )}
 
+                                            {/* BUTONUL DE CHAT  */}
+                                            <li className="nav-item">
+                                                <Link to="/chat" className="nav-link">
+                                                    💬 Chat
+                                                </Link>
+                                            </li>
+                                            {/* ----------------------------------------------- */}
+
                                             {/* Badge pentru role + Logout */}
                                             <li className="nav-item" style={{marginLeft: 'auto', display: 'flex', gap: '1rem', alignItems: 'center'}}>
                                                 <span className="role-badge" style={{
@@ -146,6 +155,7 @@ function App() {
                                             <>
                                                 <Route path="/users" element={<UsersPage />} />
                                                 <Route path="/devices" element={<DevicesPage isAdmin={true} />} />
+                                                <Route path="/chat" element={<ChatPage />} />
                                                 <Route path="/" element={<Navigate to="/users" replace />} />
                                             </>
                                         )}
@@ -161,6 +171,7 @@ function App() {
                                                     path="/consumption"
                                                     element={<EnergyConsumptionPage userId={userId} />}
                                                 />
+                                                <Route path="/chat" element={<ChatPage />} />
                                                 <Route path="/" element={<Navigate to="/my-devices" replace />} />
                                             </>
                                         )}

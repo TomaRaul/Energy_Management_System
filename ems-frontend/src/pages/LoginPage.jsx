@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { authAPI, usersAPI } from '../services/api';
-import './LoginPage.css';
+import '../css/LoginPage.css';
 
 function LoginPage({ onLoginSuccess }) {
     const [username, setUsername] = useState('');
@@ -40,9 +40,11 @@ function LoginPage({ onLoginSuccess }) {
 
                 const role = currentUser.role || 'client';
                 const userId = currentUser.id;
+                const userName = currentUser.name;
 
                 localStorage.setItem('userRole', role);
                 localStorage.setItem('userId', userId);
+                localStorage.setItem('userName', userName);
 
                 onLoginSuccess(role, userId);
             } else {

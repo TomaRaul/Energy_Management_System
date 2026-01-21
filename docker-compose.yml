@@ -270,6 +270,58 @@ services:
         - "traefik.http.services.monitoring-service.loadbalancer.server.port=8085"
       restart: on-failure
 
+    # ==========================================
+    # WEBSOCKET MICROSERVICE
+    # ==========================================
+  websocket-service:
+        build:
+          context: ./websocket-service
+          dockerfile: Dockerfile
+        container_name: websocket-service
+        environment:
+          SPRING_RABBITMQ_HOST: rabbitmq
+          SPRING_RABBITMQ_PORT: 5672
+          SPRING_RABBITMQ_USERNAME: admin
+          SPRING_RABBITMQ_PASSWORD: admin
+          CUSTOMER_SUPPORT_URL: http://customer-support-service:8087
+          PORT: "8086"
+        ports:
+          - "8086:8086"
+        networks:
+          - ems-network
+        depends_on:
+          rabbitmq:
+            condition: service_healthy
+        labels:
+          - "traefik.enable=true"
+          - "traefik.http.routers.websocket.rule=PathPrefix(`/ws`)"
+          - "traefik.http.routers.websocket.entrypoints=web"
+          - "traefik.http.services.websocket-service.loadbalancer.server.port=8086"
+          - "traefik.http.services.websocket-service.loadbalancer.sticky.cookie=true"
+          - "traefik.http.services.websocket-service.loadbalancer.sticky.cookie.name=ws_sticky"
+        restart: unless-stopped
+
+    # ==========================================
+    # WEBSOCKET MICROSERVICE
+    # ==========================================
+  customer-support-service:
+          build:
+            context: ./customer-support-service
+            dockerfile: Dockerfile
+          container_name: customer-support-service
+          environment:
+            WEBSOCKET_SERVICE_URL: "http://websocket-service:8086/api/send-chat"
+            PORT: "8087"
+          ports:
+            - "8087:8087"
+          networks:
+            - ems-network
+          labels:
+            # Traefik routing pentru REST
+            - "traefik.enable=true"
+            - "traefik.http.routers.support.rule=PathPrefix(`/chat`)"
+            - "traefik.http.services.support.loadbalancer.server.port=8087"
+
   # =========================
   # FRONTEND
   # =========================

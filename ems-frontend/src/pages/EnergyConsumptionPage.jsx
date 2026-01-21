@@ -4,7 +4,7 @@ import {
     LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
     Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
-import './EnergyConsumptionPage.css';
+import '../css/EnergyConsumptionPage.css';
 
 const EnergyConsumptionPage = ({ userId }) => {
     const [devices, setDevices] = useState([]);

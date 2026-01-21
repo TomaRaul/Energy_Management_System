@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { devicesAPI, usersAPI } from '../services/api';
-import './DevicesPage.css';
+import '../css/DevicesPage.css';
 
 const DevicesPage = () => {
   const [devices, setDevices] = useState([]);
@@ -203,7 +203,7 @@ const DevicesPage = () => {
                   name="MCV"
                   value={formData.MCV}
                   onChange={handleInputChange}
-                  placeholder="Enter MCV in watts"
+                  placeholder="Enter MCV in kWh"
                 />
               </div>
 
@@ -246,7 +246,7 @@ const DevicesPage = () => {
               <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>MCV (Watts)</th>
+                <th>MCV (kWh)</th>
                 <th>Assigned User</th>
                 <th>Actions</th>
               </tr>

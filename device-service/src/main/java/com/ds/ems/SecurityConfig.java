@@ -31,6 +31,7 @@ public class SecurityConfig {
     // lista cailor publice pentru swagger
     private static final String[] SWAGGER_WHITE_LIST = {
             "/v3/api-docs/**",
+            "/devices/intern/**",
             "/swagger-ui/**",
             "/swagger-ui.html"
     };
